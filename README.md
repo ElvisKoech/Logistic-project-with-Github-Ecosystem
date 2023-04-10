@@ -8,7 +8,7 @@ Python functions from zero to hero
 * Create a scaffold for structure of project 'Makefile', 'requirements.txt'
 * optional (setup virtualenv) (install ipython outside of requirements.txt)
 
-## step 2: Set up an interactive debugging working
+## step 2: Get interactive debugging working
 * use ipython and ipdb
 
 ```
