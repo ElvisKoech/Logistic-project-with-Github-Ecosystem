@@ -3,13 +3,13 @@ install:
 		pip install -r requirements.txt
 
 test:
-	python -m pytest -vv --cov=hello test_*.py
+	python -m pytest -vv --cov=calCLI --cov=devopslib test_*.py
 
 format:
-	black *.py
+	black *.py devopslib/*.py
 
 lint:
-	pylint --disable=R,C --ignore-patterns=test_.*?py *.py
+	pylint --disable=R,C --ignore-patterns=test_.*?py *.py  devopslib/*.py
 
 container_lint:
 	docker run --rm -i hadolint/hadolint < Dockerfile
