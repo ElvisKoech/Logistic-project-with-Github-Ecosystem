@@ -11,6 +11,7 @@ print(distance.distance(newport_ri, cleveland_oh).miles)
 
 """
 import geopy
+from geopy.distance import geodesic
 #build a list of 10 cities in the usa and their coordinates
 
 cities = [
@@ -25,9 +26,20 @@ cities = [
     {"city": "Dallas, Texas", "lat": 32.7767, "lng": -96.7970},
     {"city": "San Jose, California", "lat": 37.3382, "lng": -121.8863}
 ]
-def distance(city1, city2):
-    """Calculate the distance between two cities"""
-    return geopy.distance.distance(city1, city2)
 
-#call the function to calculate the distance between two cities
-distance(ci)
+def calculate_distance(city1, city2):
+    city1_lat, city1_lng = None, None
+    city2_lat, city2_lng = None, None
+    for city in cities:
+        if city["city"] == city1:
+            city1_lat, city1_lng = city["lat"], city["lng"]
+        elif city["city"] == city2:
+            city2_lat, city2_lng = city["lat"], city["lng"]
+        if city1_lat is not None and city2_lat is not None:
+            break
+    distance = geodesic((city1_lat, city1_lng), (city2_lat, city2_lng)).km
+    return distance
+
+# Example usage
+distance = calculate_distance("New York City, New York", "Los Angeles, California")
+print(f"{distance} km") # Output: 3947.026423034262
