@@ -46,4 +46,16 @@ def calculate_distance(city1, city2):
 distance_btwn_cities = calculate_distance(
     "New York City, New York", "Los Angeles, California"
 )
+
+
+def print_cities():
+    """
+    print the list of cities
+    """
+    for city in cities:
+        print(city["city"])
+    
+    return [city["city"] for city in cities]
+
+# print_cities()
 print(f"{distance_btwn_cities} km")  # Output: 3947.026423034262
