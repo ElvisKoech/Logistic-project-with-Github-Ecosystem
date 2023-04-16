@@ -8,6 +8,7 @@ from devopslib.logistics import (
     get_city_coordinates,
     travel_time,
 )
+from devopslib.wiki import get_wiki_keywords
 
 app = FastAPI()
 
@@ -51,8 +52,8 @@ async def get_distance(city1: City, city2: City):
 
 
 # build a post method to get travel time  between two cities
-@app.post("/travel_time")
-async def get_traveltime(city1: City, city2: City):
+@app.post("/travel")
+async def travel(city1: City, city2: City):
     """get travel time between two cities with POST HTTP method
 
     Args:
@@ -62,8 +63,24 @@ async def get_traveltime(city1: City, city2: City):
     Returns:
         float: travel time between cities
     """
-    hours = travel_time(city1, city2)
+    print(f"city1: {city1}")
+    print(f"city2: {city2}")
+    hours = travel_time(city1.name, city2.name)
+    print(f"{hours: {hours}}")
     return {"travel_time": f"{hours} hours"}
+
+
+@app.post("/keywords")
+async def get_keywords(city: City):
+    """get top 10 keywords of a city with POST HTTP method
+
+    Args:
+        city (City): city to get keywords
+
+    Returns:
+        list: list of keywords
+    """
+    return {"keywords": get_wiki_keywords(city.name)}
 
 
 if __name__ == "__main__":
