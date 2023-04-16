@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from logistics import (
+from devopslib.logistics import (
     calculate_distance,
     print_cities,
     get_city_coordinates,
