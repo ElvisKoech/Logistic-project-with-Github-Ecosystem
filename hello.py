@@ -1,1 +1,6 @@
-# create a list with 10 random fruits
+x = 2
+y = 3
+
+# import ipdb;ipdb.set_trace()
+
+print(x + y)
