@@ -67,4 +67,8 @@ def travel_time(city1, city2, speed=60):
 # distance_btwn_cities = calculate_distance(
 #     "New York City, New York", "Los Angeles, California"
 # )
-# print(f"{distance_btwn_cities} miles")  # Output: 3947.026423034262
+# print(f"{distance_btwn_cities} miles")  # Output: 2450.9503446683375
+# time_btwn_cities = travel_time(
+#     "New York City, New York", "Los Angeles, California"
+# )
+# print(f"{time_btwn_cities} hours")  # Output: 2450.9503446683375
