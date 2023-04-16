@@ -10,52 +10,61 @@ print(distance.distance(newport_ri, cleveland_oh).miles)
 538.39044536
 
 """
+# from geopy.distance import distance
 from geopy.distance import geodesic
 
-# build a list of 10 cities in the usa and their coordinates
-
-cities = [
-    {"city": "New York City, New York", "lat": 40.7128, "lng": -74.0060},
-    {"city": "Los Angeles, California", "lat": 34.0522, "lng": -118.2437},
-    {"city": "Chicago, Illinois", "lat": 41.8781, "lng": -87.6298},
-    {"city": "Houston, Texas", "lat": 29.7604, "lng": -95.3698},
-    {"city": "Phoenix, Arizona", "lat": 33.4484, "lng": -112.0740},
-    {"city": "Philadelphia, Pennsylvania", "lat": 39.9526, "lng": -75.1652},
-    {"city": "San Antonio, Texas", "lat": 29.4241, "lng": -98.4936},
-    {"city": "San Diego, California", "lat": 32.7157, "lng": -117.1611},
-    {"city": "Dallas, Texas", "lat": 32.7767, "lng": -96.7970},
-    {"city": "San Jose, California", "lat": 37.3382, "lng": -121.8863},
-]
+cities = {
+    "New York City, New York": (40.7128, -74.0060),
+    "Los Angeles, California": (34.0522, -118.2437),
+    "Chicago, Illinois": (41.8781, -87.6298),
+    "Houston, Texas": (29.7604, -95.3698),
+    "Phoenix, Arizona": (33.4484, -112.0740),
+    "Philadelphia, Pennsylvania": (39.9526, -75.1652),
+    "San Antonio, Texas": (29.4241, -98.4936),
+    "San Diego, California": (32.7157, -117.1611),
+    "Dallas, Texas": (32.7767, -96.7970),
+    "San Jose, California": (37.3382, -121.8863),
+}
 
 
 def calculate_distance(city1, city2):
-    city1_lat, city1_lng = None, None
-    city2_lat, city2_lng = None, None
-    for city in cities:
-        if city["city"] == city1:
-            city1_lat, city1_lng = city["lat"], city["lng"]
-        elif city["city"] == city2:
-            city2_lat, city2_lng = city["lat"], city["lng"]
-        if city1_lat is not None and city2_lat is not None:
-            break
-    distance = geodesic((city1_lat, city1_lng), (city2_lat, city2_lng)).km
-    return distance
+    """Calculates the distance between two cities using geopy.distance"""
+    return geodesic(cities[city1], cities[city2]).miles
 
 
-# Example usage
-distance_btwn_cities = calculate_distance(
-    "New York City, New York", "Los Angeles, California"
-)
+# # return the coordinates of the city
+def get_city_coordinates(city):
+    """Returns the coordinates of a city"""
+
+    for city_name, coordinates in cities.items():
+        if city_name == city:
+            return city_name
+        elif city_name == city:
+            return coordinates
 
 
 def print_cities():
-    """
-    print the list of cities
-    """
+    city_names = []
     for city in cities:
-        print(city["city"])
-    
-    return [city["city"] for city in cities]
+        city_names.append(city)
+        print(city)
+    return city_names
+
+
+# estimate the travel time between two cities by car
+def travel_time(city1, city2, speed=60):
+    """Estimates the travel time between two cities by car
+    given a default speed of 60 mph
+    """
+    return (
+        calculate_distance(get_city_coordinates(city1), get_city_coordinates(city2))
+        / speed
+    )
+
 
 # print_cities()
-print(f"{distance_btwn_cities} km")  # Output: 3947.026423034262
+
+# distance_btwn_cities = calculate_distance(
+#     "New York City, New York", "Los Angeles, California"
+# )
+# print(f"{distance_btwn_cities} miles")  # Output: 3947.026423034262
