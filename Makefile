@@ -9,7 +9,7 @@ format:
 	black *.py devopslib/*.py
 
 lint:
-	pylint --disable=R,C --ignore-patterns=test_.*?py *.py  devopslib/*.py
+	pylint --disable=R,C --extension-pkg-whitelist='pydantic' main.py --ignore-patterns=test_.*?py *.py  devopslib/*.py
 
 container_lint:
 	docker run --rm -i hadolint/hadolint < Dockerfile
